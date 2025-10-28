@@ -9,6 +9,9 @@ export const useNotification = () => {
     if ('Notification' in window) {
       setIsSupported(true);
       setPermission(Notification.permission);
+      console.log('알림 지원됨, 현재 권한:', Notification.permission);
+    } else {
+      console.log('알림이 지원되지 않음');
     }
   }, []);
 

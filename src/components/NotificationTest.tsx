@@ -12,6 +12,7 @@ export default function NotificationTest() {
   };
 
   const handleShowBasicNotification = () => {
+    console.log('기본 알림');
     showNotification('테스트 알림', {
       body: '이것은 기본 테스트 알림입니다.',
       tag: 'test-notification',
@@ -19,6 +20,7 @@ export default function NotificationTest() {
   };
 
   const handleShowRichNotification = () => {
+    console.log('풍부한 알림');
     showNotification('풍부한 알림', {
       body: '액션 버튼과 이미지가 포함된 알림입니다.',
       icon: '/icons/icon-tree.png',
@@ -38,6 +40,7 @@ export default function NotificationTest() {
   };
 
   const handleShowTimedNotification = () => {
+    console.log('시간 지연 알림');
     showNotification('시간 지연 알림', {
       body: '5초 후에 자동으로 사라집니다.',
       tag: 'timed-notification',
@@ -51,6 +54,22 @@ export default function NotificationTest() {
         });
       });
     }, 5000);
+  };
+  // 가장 기본적인 알림 테스트
+  const handleSimpleTest = () => {
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        // 직접 알림 생성
+        const notification = new Notification('간단한 테스트', {
+          body: '가장 기본적인 알림입니다.',
+        });
+        console.log('간단한 알림 생성됨:', notification);
+      } else {
+        console.log('권한이 필요합니다');
+      }
+    } else {
+      console.log('알림이 지원되지 않습니다');
+    }
   };
 
   if (!isSupported) {
@@ -86,6 +105,12 @@ export default function NotificationTest() {
           </button>
         )}
 
+        <button
+          onClick={handleSimpleTest}
+          disabled={permission !== 'granted'}
+          className='w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors'>
+          test 알림 표시
+        </button>
         <button
           onClick={handleShowBasicNotification}
           disabled={permission !== 'granted'}

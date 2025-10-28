@@ -11,6 +11,10 @@ const pwaConfig = withPWA({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
+  // custome Service Worker
+  // sw: 'sw.js',
+  // 기존 sw.js를 확장
+  swSrc: 'worker/index.js', // 커스텀 소스 지정
   // 매니페스트 자동 생성 설정
   buildExcludes: [/middleware-manifest.json$/],
 });
